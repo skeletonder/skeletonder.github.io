@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY HAPPY HAPPY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+       <!-- soy skele ctm said de mierda -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fce3ec 0%, #ffe8cc 100%);
+            font-family: 'Nunito', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 105, 135, 0.2);
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transition:all 0.3s ease;
+        }
+
+        .question-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5em;
+            color: #d6336c;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-si {
+            background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+            color: white;
+        }
+
+        .btn-no {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .angry-gif {
+            max-width: 250px;
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .angry-text {
+            font-size: 3em;
+            font-weight: 800;
+            color: #c92a2a;
+            text-transform: uppercase;
+            animation: shake 0.5s;
+        }
+
+        .love-letter-container {
+            text-align: left;
+            color: #444;
+            line-height: 1.7;
+        }
+        
+        .love-letter-container p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        @media (max-width: 480px) {
+            .question-title { font-size: 2.5em; }
+            .btn { padding: 12px 30px; font-size: 1.1em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="question-screen">
+            <h1 class="question-title">¿Me amas? 🥺😼</h1>
+            <div class="buttons-container">
+                <button id="btn-si" class="btn btn-si">Sí</button>
+                <button id="btn-no" class="btn btn-no">No</button>
+            </div>
+        </div>
+
+        <div id="result-screen" class="hidden">
+        </div>
+    </div>
+<!-- que mierda revisas oe
+  -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const questionScreen = document.getElementById('question-screen');
+            const resultScreen = document.getElementById('result-screen');
+            const btnSi = document.getElementById('btn-si');
+            const btnNo = document.getElementById('btn-no');
+
+            function showResult(contentHTML, isAngry = false) {
+                questionScreen.classList.add('hidden');
+                resultScreen.classList.remove('hidden');
+                resultScreen.innerHTML = contentHTML;
+                
+                if(isAngry) {
+                     document.querySelector('.container').style.boxShadow = "0 15px 35px rgba(201, 42, 42, 0.4)";
+                }
+            }
+
+            btnNo.addEventListener('click', () => {
+                const angryHTML = `
+                    <img src="https://media.tenor.com/mQaC4HrPBRgAAAAM/funny.gif" class="angry-gif" alt="Gato riendo">
+                    <h1 class="angry-text">fuera mrd  🥺🖕😾</h1>
+                `;
+                showResult(angryHTML, true);
+            });
+
+
+            btnSi.addEventListener('click', () => {
+                const letterHTML = `
+                    <img src="https://media.tenor.com/FUXUChJcZxkAAAAM/catride.gif" class="love-gif" alt="Gatito asonriendo">
+                    <div class="love-letter-container">
+                        <p>Hola mi amor, sabia que elegirías el sí porque soy pro xd. Bueno, estos escritos te los redacto con el fin de desearte una feliz navidad, expresarte mis sentimientos por nuestros 7 meses juntos y acompañar tu alegría y tal vez algo de tristeza por acabar tu etapa escolar, y sí, me gusta hacer una introducción cuando voy a escribir algo jajskaj. Me di cuenta de ello conforme pasaba el tiempo escribiéndote cartas. Sin más que añadir a esta pequeña introducción empiezo.</p>
+                        
+                        <p>Cariño, feliz navidad, esta es la primera de muchas navidades que pasaremos juntos, y aunque, con "juntos " me refiero a pues, siendo una pareja y lamentablemente no podamos estar literalmente juntos, me hace feliz poder ser tu novio y celebrar esta época del año que tanto amas al menos virtualmente, este año has sido una muy buena niña, por ello, sé que Papa Noel te va a dar lo que desees ☝️. Y si tu deseo no se hace realidad, avísame que veré como lo reemplazo. Esta será la mejor navidad que pasaré hasta ahora, el solo hecho de que estés en mi vida hace que cada día sea muy importante y especial, ahora ponte a pensar el nivel de alegría que tendré por pasar esta fecha "junto" al amor de mi vida, osea fuaa, de ptmr la verdad, y bueno mi niña, espero que pases una linda y bella navidad. Cabe recalcar que más linda y bella estás tú.</p>
+                        
+                        <p>Ahora con respecto a lo otro... amor, 7 fuckings meses juntos, dioooos, no sabes la alegría y a la vez tranquilidad que me da saber que cumplimos 7 meses, 7 meses en los que aprendí que uno encuentra la felicidad cuando menos se lo espera, y que piola que la hallé en ti. Me encanta, me haces feliz, eres mi felicidad, y a ti te expreso mi felicidad, bueno al resto de personas también pero lo hago de una forma distinta jakasjdk, es algo como " soy muy feliz carajo, no lo entenderías, mi novia no es tu novia así está difícil que sepas lo feliz que soy". Amor en estos 7 meses aprendí demasiado gracias a ti, he mejorado aspectos que ni tenía idea que llegaría a mejorar, me has enseñado a amar a tu forma y yo a la mía, y juntos hemos fusionado esas formas de amar concluyendo a lo nuestro, a como somos, y a como queremos que lleguemos a ser, y perdón si pido muchas veces perdón como ahora mismo, pero soy una persona que erra demasiado y teme perderte, así que siempre quiere que las cosas estén bien entre los dos, necesito que sea así para poder estar en paz, contigo, conmigo y con la vida. También perdón si soy muy insistente con mis "gracias amor por todo " sé que te suelo agradecer muy seguido por todo lo que hiciste y haces por mí pero quiero hacerlo cuantas veces pueda, y no solo diciendo " gracias " también demostrándote que estoy en deuda contigo de por vida, ya sea con detalles, con regalos, cartas, locuras, textos, etc etc. Desde el momento en el que me di cuenta que tú serías quien se queda conmigo de por vida y esa decisión fue recíproca, me he vuelto completamente tuyo, tuyo y de nadie más, a la mrd el resto de personas, solo me importas tú y lucharé por tu bienestar y el bienestar de lo nuestro y nuestro futuro. Gracias por estos 7 meses llenos de tanto, tantos sentimientos, emociones, experiencias y sensaciones. Te amo mi media mandarina 🍊</p>
+                        
+                        <p>Amor, sé que se acaban las clases de tu escuela secundaria de por vida, y a pesar de que insistías en que querías que acaben, estoy seguro de que te va a quedar esa pequeña nostalgia dentro de ti. Te soy sincero, me alegra que ya acaben las clases porque así ya no te verás con casi ninguno de tus compañeros 🥰 ni yo con los míos. Amor se acaba esta etapa y se viene una que pues es más difícil, que este inicio no implique que nuestra relación y el amor que nos tengamos el uno al otro se vaya a perjudicar, solo habrá un pequeño distanciamiento que pues se soluciona con vernos una que otra vez cada "x" tiempo. Que el tiempo no sea un obstáculo para ambos amor, al contrario, que fortalezca el lazo que existe entre los dos, que sirva para demostrarle a la vida y al resto en el futuro que a pesar de las adversidades nosotros seguimos juntos. A pesar de tantas dificultades que se presentaron en el camino, nosotros logramos afrontarlas y seguimos juntos y muy muy enamorados. Te quiero Cielo, te amo con toda mi alma, con todo mi ser, con todo mi cuerpo y mente. 24/7 y solo a ti, no olvides que eres el amor de mi vida y no hay nadie más que tú en este mundo que pueda alejarme de ti. Bueno Dios también pero no creo que él lo haga 🥺. Te amo mucho cariño y espero que te haya gustado todo esto ❤️</p>
+                    </div>
+                `;
+                showResult(letterHTML);
+            });
+        });
+    </script>
+</body>
+</html>
